@@ -1,0 +1,100 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{xeCJK}
+\usepackage{fontspec,xunicode,xltxtra}
+\usepackage{titlesec}
+\usepackage[colorlinks,linkcolor=red]{hyperref}
+
+\setmainfont{Times New Roman}%缺省英文字体.serif是有衬线字体sans serif无衬线字体
+\setCJKmainfont{SimSun}
+
+\setCJKfamilyfont{song}{SimSun}                             %宋体 song
+\newcommand{\song}{\CJKfamily{song}}
+\setCJKfamilyfont{yahei}{Microsoft YaHei}                    %微软雅黑 yh
+\newcommand{\yahei}{\CJKfamily{yahei}}
+\setCJKfamilyfont{fs}{FangSong}                    %仿宋
+\newcommand{\fs}{\CJKfamily{fs}}
+\setCJKfamilyfont{kt}{KaiTi}                    %楷体
+\newcommand{\kt}{\CJKfamily{kt}}
+
+\begin{document}
+\title{ubuntu Atom \LaTeX (xelatex) \yahei{中文字体测试}}
+\author{\kt{马俊冲}}
+\date{\fs{2017年8月}}
+\maketitle
+
+\section{\yahei{环境搭建}}
+\subsection{Texlive安装}
+Texlive2017.iso 下载地址：\url{http://mirrors.ustc.edu.cn/CTAN/systems/texlive/Images/}
+安装和配置可参考网上博客,注意配置版本文件。
+具体安装细节，可以参考\href{http://www.linuxidc.com/Linux/2016-08/133913.htm}
+{Linux 系统下原版 TeX Live 2016 的安装与配置}。\\
+此外，为了使用图形化安装界面，需要\yahei{安装perl的tk组件：\\
+${sudo\ apt-get\ install\ perl-tk}$\\
+加载镜像文件:\\
+${sudo\ mount\ -o\ loop\ texlive2016.iso\ /mnt}$\\
+启动安装程序的图形化界面进行配置:\\
+${cd\ /mnt}$\\
+${sudo\ ./install-tl\ -gui}$\\
+完成后，卸载镜像文件:}\\
+${cd\ /;\ sudo\ umount\ /mnt}$\\
+进一步需要对字体配置，配置自动更新源，配置安装dummy package包等，查看上述链接。
+
+\subsection{安装xelatex}
+命令：\\
+${sudo\ apt-get\ install\ texlive-xetex}$
+关于CJK字体的安装，可以参考网上博客
+\url{http://www.jianshu.com/p/d185aad1f915}\\
+或者\\
+\url{http://www.cnblogs.com/bamboo-talking/archive/2013/01/07/2848914.html}\\
+
+\section{\yahei{Atom安装和配置}}
+\subsection{\yahei{Atom编辑器安装}}
+下载安装Atom编辑器，从官网\url{https://atom.io/}下载（网速略慢）deb安装。\\
+${sudo\ dpkg\ -i\ xxx.deb}$\\
+\subsubsection{\yahei{Atom插件安装}}
+为实现 \LaTeX 文档的编译、显示、自动补全等搜索并安装以下3个插件：\\
+latex\\
+language-latex\\
+pdf-view\\
+\subsection{\yahei{插件latex的配置}}
+Tex Path:\\
+${/usr/local/bin/latexmk}$\\
+勾选${open\ result\ after\ successful\ build}$\\
+选择Opener为pdf-view\\
+编译快捷键为ctrl+alt+b\\
+
+\section{\yahei{文档中基于xelatex的字体配置}}
+可以参考以下配置：
+\begin{verbatim}
+  \documentclass[12pt,a4paper]{article}
+  \usepackage{xeCJK}
+  \usepackage{fontspec,xunicode,xltxtra}
+  \usepackage{titlesec}
+  \usepackage[colorlinks,linkcolor=red]{hyperref}
+
+  \setmainfont{Times New Roman}%缺省英文字体.serif是有衬线字体sans serif无衬线字体
+  \setCJKmainfont{SimSun}
+
+  \setCJKfamilyfont{song}{SimSun}                             %宋体 song
+  \newcommand{\song}{\CJKfamily{song}}
+  \setCJKfamilyfont{yahei}{Microsoft YaHei}                    %微软雅黑 yh
+  \newcommand{\yahei}{\CJKfamily{yahei}}
+  \setCJKfamilyfont{fs}{FangSong}                    %仿宋
+  \newcommand{\fs}{\CJKfamily{fs}}
+  \setCJKfamilyfont{kt}{KaiTi}                    %楷体
+  \newcommand{\kt}{\CJKfamily{kt}}
+
+  \begin{document}
+  \title{ubuntu Atom \LaTeX (xelatex) \yahei{中文字体测试}}
+  \author{\kt{马俊冲}}
+  \date{\fs{2017年8月}}
+  \maketitle
+
+\end{verbatim}
+
+
+
+I just 想 测试 \song{宋体} \fs{仿宋} \yahei{微软雅黑} \kt{楷体}\\
+\\
+And Happy With \LaTeX
+\end{document}
